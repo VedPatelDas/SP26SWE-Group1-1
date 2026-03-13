@@ -1,41 +1,97 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4">
-      {/* 1. Header & Logo */}
-      <div className="mb-8 text-center">
-        <div className="w-20 h-20 bg-scarlet rounded-2xl mx-auto mb-4 flex items-center justify-center text-white font-bold text-3xl shadow-lg">
-          R
+    <main className="min-h-screen bg-white dark:bg-slate-950 flex flex-col items-center justify-center p-4">
+      {/* 1. Header - Using TRANSPARENT PNG for no white box */}
+      <div className="mb-10 text-center flex flex-col items-center">
+        <div className="relative w-80 h-80 mb-2">
+          <Image 
+            src="/landingicon.png" 
+            alt="Scarlet AI Logo" 
+            fill 
+            className="object-contain"
+            priority
+          />
         </div>
-        <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white">Scarlet AI</h1>
-        <p className="text-slate-500 mt-2">The official AI interface for the Rutgers community.</p>
+        
+        <p className="text-slate-600 dark:text-slate-400 mt-2 font-semibold">
+          The official AI interface for the Rutgers community.
+        </p>
       </div>
 
-      {/* 2. The Loop/Preview Box */}
-      <div className="w-full max-w-3xl aspect-video bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-xl shadow-xl mb-8 p-6 overflow-hidden relative">
-        <div className="flex flex-col space-y-4">
-           <div className="bg-scarlet/10 self-end p-3 rounded-lg text-sm max-w-[80%]">
-             What is the Aksharpurushottam Upasana?
+      {/* 2. The Preview Box - Higher Contrast for Testing Team Demo */}
+      <div className="w-full max-w-3xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl mb-10 p-8 relative">
+        <div className="flex flex-col space-y-6">
+           {/* User Message */}
+           <div className="bg-scarlet text-slate-900 self-end p-4 rounded-2xl rounded-tr-none text-sm font-medium max-w-[80%] shadow-md">
+             What is Software Engineering and will AI be taking over?
            </div>
-           <div className="bg-slate-100 dark:bg-slate-800 self-start p-3 rounded-lg text-sm max-w-[80%] animate-pulse">
-             Generating answer...
+           
+           {/* AI Response Area */}
+           <div className="flex items-start gap-4">
+             {/* The Animated Avatar */}
+             <div className="relative flex-shrink-0 w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-inner border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+               {/* SPINNING RING */}
+               <div className="absolute inset-0 rounded-full border-4 border-t-scarlet border-transparent animate-spin"></div>
+               
+               {/* THE ACTUAL ICON IN THE CIRCLE */}
+               <div className="relative w-8 h-8">
+                 <Image 
+                   src="/overlayicon.png" 
+                   alt="AI Avatar" 
+                   fill
+                   className="object-contain p-1"
+                 />
+               </div>
+             </div>
+
+             {/* Response Text */}
+             <div className="bg-white dark:bg-slate-800 self-start p-5 rounded-2xl rounded-tl-none text-sm border border-slate-200 dark:border-slate-700 shadow-sm w-full max-w-[70%]">
+               <div className="flex gap-1 mb-2">
+                 <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce"></div>
+                 <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                 <div className="w-2 h-2 bg-slate-300 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+               </div>
+               <span className="text-slate-900 dark:text-slate-100 font-medium">Analyzing prompt and generating response...</span>
+             </div>
            </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
       </div>
 
-      {/* 3. Navigation Actions */}
-      <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-        <Link href="/login" className="flex-1 bg-scarlet text-white text-center py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-md">
-          Login with @scarletmail
-        </Link>
-        <Link href="/chat" className="flex-1 bg-white border border-slate-300 text-slate-700 text-center py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
-          Try as Guest
-        </Link>
-      </div>
+      {/* 3. High-Contrast Buttons - Essential for Acceptancy Tests */}
+      <div className="flex flex-col gap-4 w-full max-w-md">
+  {/* Primary Login Button: Red by default, Darker Red on hover, White text */}
+  <Link 
+    href="/login" 
+    className="w-full bg-[#cc0033] text-white text-center py-5 rounded-2xl font-black text-xl hover:bg-[#990026] transition-all shadow-xl active:scale-95 border-b-4 border-red-900"
+  >
+    LOGIN WITH SCARLETMAIL
+  </Link>
 
-      <p className="mt-6 text-xs text-slate-400">Restricted to Rutgers University students and faculty.</p>
+  <div className="flex gap-4 w-full">
+    {/* Secondary Action: SIGN UP */}
+    <Link 
+      href="/signup" 
+      className="flex-1 bg-white border-2 border-[#cc0033] text-[#cc0033] text-center py-4 rounded-2xl font-black text-lg hover:bg-red-50 transition-all shadow-lg active:scale-95 border-b-4 border-red-100"
+    >
+      CREATE ACCOUNT
+    </Link>
+
+    {/* Secondary Action: GUEST */}
+    <Link 
+      href="/chat" 
+      className="flex-1 bg-slate-900 text-white text-center py-4 rounded-2xl font-black text-lg hover:bg-black transition-all shadow-lg active:scale-95 border-b-4 border-slate-700"
+    >
+      GUEST ACCESS
+    </Link>
+  </div>
+</div>
+
+      <p className="mt-10 text-xs text-slate-500 font-bold uppercase tracking-widest">
+        Rutgers University Restricted Access
+      </p>
     </main>
   );
 }
